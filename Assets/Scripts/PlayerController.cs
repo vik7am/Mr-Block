@@ -4,13 +4,15 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rigidbody2d;
-    public GameObject wonGamePannel;
-    public GameObject LostGamePannel;
+    public GameObject wonGamePanel;
+    public GameObject lostGamePanel;
+    public GameObject pauseGamePanel;
     public float defaultSpeed;
     public float accelerationTime;
     public float acceleration;
     float speed;
     bool isGameOver;
+    bool isGamePaused;
     float horizontalSpeed;
     float verticalSpeed;
     float movementTime;
@@ -21,14 +23,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(isGameOver){
+        if(isGameOver || isGamePaused){
             horizontalSpeed = 0;
             verticalSpeed = 0;
             return;
         }
         horizontalSpeed = Input.GetAxis("Horizontal");
         verticalSpeed = Input.GetAxis("Vertical");
-        if(Input.GetKey("space")){
+        if(Input.GetKey(KeyCode.Escape)){
+            isGamePaused = true;
+            pauseGamePanel.SetActive(true);
+        }
+        if(Input.GetKey(KeyCode.Space)){
             horizontalSpeed = 0;
             verticalSpeed = 0;
         }
@@ -54,14 +60,19 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Door"){
             Debug.Log("Level Completed");
-            wonGamePannel.SetActive(true);
+            wonGamePanel.SetActive(true);
             isGameOver = true;
         }
         else if(other.tag == "Enemy"){
             Debug.Log("Game Over");
-            LostGamePannel.SetActive(true);
+            lostGamePanel.SetActive(true);
             isGameOver = true;
         }
+    }
+
+    public void ResumeGame(){
+        isGamePaused = false;
+        pauseGamePanel.SetActive(false);
     }
 
     public void RestartGame(){
