@@ -267,6 +267,8 @@ GameObject:
   - component: {fileID: 144032541}
   - component: {fileID: 144032540}
   - component: {fileID: 144032539}
+  - component: {fileID: 144032543}
+  - component: {fileID: 144032542}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -359,12 +361,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144032538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.45, y: 2.89, z: 0}
+  m_LocalPosition: {x: 0.01, y: -3.05, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &144032542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144032538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67831fe4f6dfec648b780ec26abf1013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTag: Wall
+  player: {fileID: 641731795}
+  rb: {fileID: 144032543}
+  speed: 2
+--- !u!50 &144032543
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144032538}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &209769965
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +498,7 @@ GameObject:
   - component: {fileID: 222171710}
   m_Layer: 0
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -568,7 +607,7 @@ GameObject:
   - component: {fileID: 342224215}
   m_Layer: 0
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -990,7 +1029,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &641731793
 Rigidbody2D:
@@ -1051,6 +1090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20e661e2ad81ee46afe25c519c65436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorTag: Door
+  enemyTag: Enemy
   rigidbody2d: {fileID: 641731793}
   wonGamePanel: {fileID: 1776271790}
   lostGamePanel: {fileID: 1232765247}
@@ -1465,7 +1506,7 @@ Transform:
   - {fileID: 1779074766}
   - {fileID: 1683336180}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888643763
 GameObject:
@@ -1662,7 +1703,7 @@ GameObject:
   - component: {fileID: 1061885468}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2250,7 +2291,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587428647
 GameObject:
@@ -2853,7 +2894,7 @@ GameObject:
   - component: {fileID: 1903562504}
   m_Layer: 0
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

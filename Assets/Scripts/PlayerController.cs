@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public string doorTag = "Door";
+    public string enemyTag = "Enemy";
     public Rigidbody2D rigidbody2d;
     public GameObject wonGamePanel;
     public GameObject lostGamePanel;
@@ -58,16 +60,23 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Door"){
-            Debug.Log("Level Completed");
+        if(other.tag == doorTag){
             wonGamePanel.SetActive(true);
             isGameOver = true;
         }
-        else if(other.tag == "Enemy"){
-            Debug.Log("Game Over");
+        else if(other.tag == enemyTag){
             lostGamePanel.SetActive(true);
             isGameOver = true;
         }
+    }
+
+    public bool GameRunning(){
+        if(isGameOver == false && isGamePaused == false){
+            return true;
+        }
+        else
+            return false;
+        //return (isGameOver && isGamePaused && false);
     }
 
     public void ResumeGame(){
