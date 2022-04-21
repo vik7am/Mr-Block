@@ -6,34 +6,49 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rigidbody2d;
     public GameObject wonGamePannel;
     public GameObject LostGamePannel;
-    public float speed;
-    //float time = 0f;
-    float defaultSpeed;
+    public float defaultSpeed;
+    public float accelerationTime;
+    public float acceleration;
+    float speed;
     bool isGameOver;
-
+    float horizontalSpeed;
+    float verticalSpeed;
+    float movementTime;
+    
     private void Start() {
-        defaultSpeed = speed;
+        speed = defaultSpeed;
     }
 
     void Update()
     {
         if(isGameOver){
+            horizontalSpeed = 0;
+            verticalSpeed = 0;
             return;
         }
-        
-        if(Input.GetAxis("Horizontal") > 0) {
-            transform.Translate(new Vector2(speed * Time.deltaTime, 0f));
+        horizontalSpeed = Input.GetAxis("Horizontal");
+        verticalSpeed = Input.GetAxis("Vertical");
+        if(Input.GetKey("space")){
+            horizontalSpeed = 0;
+            verticalSpeed = 0;
         }
-        else if(Input.GetAxis("Horizontal") < 0) {
-            transform.Translate(new Vector2(-speed * Time.deltaTime, 0f));
-        }
-        else if(Input.GetAxis("Vertical") > 0) {
-            transform.Translate(new Vector2(0f, speed * Time.deltaTime));
-        }
-        else if(Input.GetAxis("Vertical") < 0) {
-            transform.Translate(new Vector2(0f, -speed * Time.deltaTime));
-        }
-        
+        if(horizontalSpeed == 0 && verticalSpeed == 0)
+            movementTime = 0;
+        else
+            movementTime += Time.deltaTime;
+        if(movementTime >= accelerationTime)
+            speed += acceleration * Time.deltaTime;
+        else
+            speed = defaultSpeed;
+    }
+
+    private void FixedUpdate() {
+        if(Mathf.Abs(horizontalSpeed) > 0)
+            rigidbody2d.velocity = new Vector2(horizontalSpeed * speed, 0);
+        else if(Mathf.Abs(verticalSpeed) > 0)
+            rigidbody2d.velocity = new Vector2(0, verticalSpeed * speed);
+        else
+            rigidbody2d.velocity = new Vector2(0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -41,56 +56,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Level Completed");
             wonGamePannel.SetActive(true);
             isGameOver = true;
-            //rigidbody2d.velocity = new Vector2(0f, 0f);
         }
         else if(other.tag == "Enemy"){
             Debug.Log("Game Over");
             LostGamePannel.SetActive(true);
             isGameOver = true;
-            //rigidbody2d.velocity = new Vector2(0f, 0f);
         }
     }
 
     public void RestartGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    /*void Update()
-    {
-        if(isGameOver){
-            return;
-        }
-        if(Input.GetKey("space")){
-            rigidbody2d.velocity = new Vector2(0f, 0f);
-            speed = defaultSpeed;
-            return;
-        }
-        if(Input.GetAxis("Horizontal") > 0) {
-            rigidbody2d.velocity = new Vector2(speed, 0f);
-        }
-        else if(Input.GetAxis("Horizontal") < 0) {
-            rigidbody2d.velocity = new Vector2(-speed, 0f);
-        }
-        else if(Input.GetAxis("Vertical") > 0) {
-            rigidbody2d.velocity = new Vector2(0f, speed);
-        }
-        else if(Input.GetAxis("Vertical") < 0) {
-            rigidbody2d.velocity = new Vector2(0f, -speed);
-        }
-        else if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) {
-            rigidbody2d.velocity = new Vector2(0f, 0f);
-        }
-        
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0){
-            time += Time.deltaTime;
-        }
-        else{
-            time = 0f;
-            speed = defaultSpeed;
-        }
-
-        if(time > 1){
-            speed += 1 * Time.deltaTime;
-        }
-    }*/
 }
