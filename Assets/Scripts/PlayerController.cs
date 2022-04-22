@@ -1,90 +1,84 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public string doorTag = "Door";
-    public string enemyTag = "Enemy";
-    public Rigidbody2D rigidbody2d;
-    public GameObject wonGamePanel;
-    public GameObject lostGamePanel;
-    public GameObject pauseGamePanel;
-    public float defaultSpeed;
-    public float accelerationTime;
-    public float acceleration;
-    float speed;
-    bool isGameOver;
-    bool isGamePaused;
+    Rigidbody2D rigidbody2d;
+    GameUI gameUI;
+    float movementSpeed;
     float horizontalSpeed;
     float verticalSpeed;
     float movementTime;
-    
-    private void Start() {
-        speed = defaultSpeed;
+    public float speed;
+    public float accelerationTime;
+    public float acceleration;
+    public string doorTag = "Door";
+    public string enemyTag = "Enemy";
+
+    void Awake() {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+        gameUI = FindObjectOfType<GameUI>();
+        movementSpeed = speed;
     }
 
     void Update()
     {
-        if(isGameOver || isGamePaused){
+        if(gameUI.GamePaused()){
             horizontalSpeed = 0;
             verticalSpeed = 0;
             return;
         }
         horizontalSpeed = Input.GetAxis("Horizontal");
         verticalSpeed = Input.GetAxis("Vertical");
-        if(Input.GetKey(KeyCode.Escape)){
-            isGamePaused = true;
-            pauseGamePanel.SetActive(true);
-        }
-        if(Input.GetKey(KeyCode.Space)){
-            horizontalSpeed = 0;
-            verticalSpeed = 0;
-        }
-        if(horizontalSpeed == 0 && verticalSpeed == 0)
-            movementTime = 0;
-        else
-            movementTime += Time.deltaTime;
-        if(movementTime >= accelerationTime)
-            speed += acceleration * Time.deltaTime;
-        else
-            speed = defaultSpeed;
+        PlayerInput();
+        PlayerMovementTime();
+        PlayerAcceleration();
     }
 
-    private void FixedUpdate() {
+    void FixedUpdate() {
         if(Mathf.Abs(horizontalSpeed) > 0)
-            rigidbody2d.velocity = new Vector2(horizontalSpeed * speed, 0);
+            rigidbody2d.velocity = new Vector2(horizontalSpeed * movementSpeed, 0);
         else if(Mathf.Abs(verticalSpeed) > 0)
-            rigidbody2d.velocity = new Vector2(0, verticalSpeed * speed);
+            rigidbody2d.velocity = new Vector2(0, verticalSpeed * movementSpeed);
         else
             rigidbody2d.velocity = new Vector2(0, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == doorTag){
-            wonGamePanel.SetActive(true);
-            isGameOver = true;
-        }
-        else if(other.tag == enemyTag){
-            lostGamePanel.SetActive(true);
-            isGameOver = true;
-        }
+    void PlayerInput(){
+        if(Input.GetKey(KeyCode.Escape))
+            gameUI.ShowPauseUI();
+        
+        if(Input.GetKey(KeyCode.Space))
+            Brake();
     }
 
-    public bool GameRunning(){
-        if(isGameOver == false && isGamePaused == false){
-            return true;
-        }
+    void PlayerMovementTime(){
+        if(horizontalSpeed == 0 && verticalSpeed == 0)
+            movementTime = 0;
         else
-            return false;
-        //return (isGameOver && isGamePaused && false);
+            movementTime += Time.deltaTime;
     }
 
-    public void ResumeGame(){
-        isGamePaused = false;
-        pauseGamePanel.SetActive(false);
+    void PlayerAcceleration(){
+        if(movementTime >= accelerationTime)
+            movementSpeed += acceleration * Time.deltaTime;
+        else
+            movementSpeed = speed;
     }
 
-    public void RestartGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    void Brake(){
+        horizontalSpeed = 0;
+        verticalSpeed = 0;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == doorTag){
+            gameUI.ShowWonUI();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == enemyTag){
+            gameUI.ShowLostUI();
+        }
     }
 }
