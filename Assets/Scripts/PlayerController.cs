@@ -80,5 +80,8 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == enemyTag){
             gameUI.ShowLostUI();
         }
+        else if(other.gameObject.tag == "Stone"){
+            movementTime = 0;
+        }
     }
 }

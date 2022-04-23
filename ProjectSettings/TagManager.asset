@@ -7,6 +7,7 @@ TagManager:
   - Door
   - Enemy
   - Wall
+  - Stone
   layers:
   - Default
   - TransparentFX
