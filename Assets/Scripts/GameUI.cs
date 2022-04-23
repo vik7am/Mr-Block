@@ -39,7 +39,16 @@ public class GameUI : MonoBehaviour
         pauseUI.SetActive(false);
     }
 
-    public void RestartGame(){
+    public void MainMenu(){
+        SceneManager.LoadScene(0);
+    }
+
+    public void NextLevel(){
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene((currentLevel + 1) % 6);
+    }
+
+    public void RestartLevel(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
