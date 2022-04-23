@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public float followSpeed; 
     public bool patrollingEnemy;
     public bool chasingEnemy;
+    public bool horizontalPatroll;
     public string wallTag = "Wall";
     public string playerTag = "Player";
 
@@ -42,7 +43,10 @@ public class EnemyController : MonoBehaviour
     void Patroll(){
         if(chasingEnemy && playerVisible)
             return;
-        rigidbody2d.velocity = new Vector2(0, movementSpeed);
+        if(horizontalPatroll)
+            rigidbody2d.velocity = new Vector2(movementSpeed, 0);
+        else
+            rigidbody2d.velocity = new Vector2(0, movementSpeed);
     }
 
     void ChasePlayer(){
