@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67831fe4f6dfec648b780ec26abf1013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody2d: {fileID: 3163838778090721417}
   speed: 2
   followSpeed: 1
   patrollingEnemy: 1

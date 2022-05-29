@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rigidbody2d;
-    GameUI gameUI;
-    float movementSpeed;
+    public Rigidbody2D rigidbody2d;
+    public GameUI gameUI;
+    public float movementSpeed;
     float horizontalSpeed;
     float verticalSpeed;
     float movementTime;
@@ -13,10 +13,9 @@ public class PlayerController : MonoBehaviour
     public float acceleration;
     public string doorTag = "Door";
     public string enemyTag = "Enemy";
+    public string stoneTag = "Stone";
 
     void Awake() {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        gameUI = FindObjectOfType<GameUI>();
         movementSpeed = speed;
     }
 
@@ -32,6 +31,7 @@ public class PlayerController : MonoBehaviour
         PlayerInput();
         PlayerMovementTime();
         PlayerAcceleration();
+        
     }
 
     void FixedUpdate() {
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInput(){
         if(Input.GetKey(KeyCode.Escape))
-            gameUI.ShowPauseUI();
+            gameUI.ShowUI(Panel.PAUSE);
         
         if(Input.GetKey(KeyCode.Space))
             Brake();
@@ -72,15 +72,16 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == doorTag){
-            gameUI.ShowWonUI();
+            gameUI.ShowUI(Panel.WON);
+            
         }
     }
 
     void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == enemyTag){
-            gameUI.ShowLostUI();
+            gameUI.ShowUI(Panel.LOST);
         }
-        else if(other.gameObject.tag == "Stone"){
+        else if(other.gameObject.tag == stoneTag){
             movementTime = 0;
         }
     }

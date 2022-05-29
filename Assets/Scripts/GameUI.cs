@@ -3,35 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
-    GameObject wonUI;
-    GameObject lostUI;
-    GameObject pauseUI;
-    bool gamePaused;
+    public GameObject wonUI;
+    public GameObject lostUI;
+    public GameObject pauseUI;
+    bool gamePaused = false;
+    int totalScene;
 
-    void Awake()
-    {
-        wonUI = transform.GetChild(0).gameObject;
-        lostUI = transform.GetChild(1).gameObject;
-        pauseUI = transform.GetChild(2).gameObject;
+    private void Awake() {
+        totalScene = SceneManager.sceneCountInBuildSettings;
     }
 
     public bool GamePaused(){
         return gamePaused;
     }
 
-    public void ShowWonUI(){
+    public void ShowUI(Panel panel){
+        switch(panel){
+            case Panel.WON : wonUI.SetActive(true); break;
+            case Panel.LOST : lostUI.SetActive(true); break;
+            case Panel.PAUSE : pauseUI.SetActive(true); break;
+        }
         gamePaused = true;
-        wonUI.SetActive(true);
-    }
-
-    public void ShowLostUI(){
-        gamePaused = true;
-        lostUI.SetActive(true);
-    }
-
-    public void ShowPauseUI(){
-        gamePaused = true;
-        pauseUI.SetActive(true);
     }
 
     public void HidePauseUI(){
@@ -45,7 +37,7 @@ public class GameUI : MonoBehaviour
 
     public void NextLevel(){
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene((currentLevel + 1) % 6);
+        SceneManager.LoadScene((currentLevel + 1) % totalScene);
     }
 
     public void RestartLevel(){

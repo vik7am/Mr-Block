@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    PlayerController player;
-    Rigidbody2D rigidbody2d;
-    GameUI gameUI;
+    public PlayerController player;
+    public Rigidbody2D rigidbody2d;
+    public GameUI gameUI;
     float movementSpeed;
     bool playerVisible;
     public float speed;
@@ -17,9 +17,6 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        player = FindObjectOfType<PlayerController>();
-        gameUI = FindObjectOfType<GameUI>();
         movementSpeed = speed;
     }
 

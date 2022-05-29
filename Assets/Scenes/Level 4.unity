@@ -773,6 +773,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 2069276122}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8579313089108830121}
     - target: {fileID: 1182605417339325445, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
       propertyPath: m_Name
       value: Enemy Chasing
@@ -1141,6 +1149,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 2069276122}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8579313089108830121}
     - target: {fileID: 1182605417339325445, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
       propertyPath: m_Name
       value: Enemy Chasing (3)
@@ -1322,6 +1338,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 2069276122}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8579313089108830121}
     - target: {fileID: 1182605417339325445, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
       propertyPath: m_Name
       value: Enemy Chasing (1)
@@ -1620,6 +1644,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c2a8f06e210d594583c661e48b69a95, type: 3}
+--- !u!114 &2069276122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 463205726708102298, guid: 7c2a8f06e210d594583c661e48b69a95, type: 3}
+  m_PrefabInstance: {fileID: 2069276121}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b16a34dc8eaee4db22bef7341914ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2089021345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1671,6 +1706,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 2069276122}
+    - target: {fileID: 1182605417339325444, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8579313089108830121}
     - target: {fileID: 1182605417339325445, guid: 3ba56f26eb2548541a57be821d4ae1d2, type: 3}
       propertyPath: m_Name
       value: Enemy Chasing (2)
@@ -1732,5 +1775,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8579313088542600059, guid: 81aedc241854432488924b4cb2149b5d, type: 3}
+      propertyPath: gameUI
+      value: 
+      objectReference: {fileID: 2069276122}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81aedc241854432488924b4cb2149b5d, type: 3}
+--- !u!114 &8579313089108830121 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8579313088542600059, guid: 81aedc241854432488924b4cb2149b5d, type: 3}
+  m_PrefabInstance: {fileID: 8579313089108830120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20e661e2ad81ee46afe25c519c65436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
